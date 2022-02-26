@@ -1,13 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --primary: #9b41b2;
+  --secondary1: #1e1e1e;
+  --secondary2: #0cf2b4;
+  --secondary3: #e7e5e5;
+  --secondary4: #f2f2f2;
+  --secondary5: #ffffff;
+  --error: #b00020;
+}
+
+h1 {
+  font-size: 38px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 22px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+h5 {
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+h6 {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+button {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

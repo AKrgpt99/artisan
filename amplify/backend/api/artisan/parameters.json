@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "artisan",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-02-25T08:23:11.807Z"
+}
