@@ -11,12 +11,15 @@ function Section({ title, children, className, display }) {
       <div
         className={`w-full flex flex-row justify-between items-center pt-8 ${className}`}
       >
-        <div className="flex flex-row justify-center items-center gap-2">
+        <button
+          onClick={() => setCollapse(!collapse)}
+          className="flex flex-row justify-center items-center gap-2"
+        >
           <button onClick={() => setCollapse(!collapse)}>
             {collapse ? <CollapseIcon /> : <ExpandIcon />}
           </button>
           <h3 className="">{title}</h3>
-        </div>
+        </button>
       </div>
       <div className="w-full flex flex-col justify-center items-center">
         <div

@@ -21,7 +21,7 @@ function Header({ username, onClick }) {
         <input
           type="text"
           placeholder="Shop Artisan..."
-          className="rounded-full w-96 h-12 px-14 border-2 border-secondary3"
+          className="rounded-full w-full h-12 px-14 border-2 border-secondary3"
         />
       </div>
       <div className="flex flex-row items-center gap-5 lg:gap-9">
