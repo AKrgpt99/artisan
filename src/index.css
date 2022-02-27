@@ -63,6 +63,19 @@ body {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--secondary4);
+}
+
+.tag {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.caption {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
 }
 
 code {
