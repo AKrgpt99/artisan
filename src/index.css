@@ -2,16 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@aws-amplify/ui-react/styles.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --primary: #9b41b2;
-  --secondary1: #1e1e1e;
+  --primary-10: rgba(155, 65, 178, 0.1);
+  --primary-20: rgba(155, 65, 178, 0.2);
+  --primary-40: rgba(155, 65, 178, 0.4);
+  --primary-60: rgba(155, 65, 178, 0.6);
+  --primary-80: rgba(155, 65, 178, 0.8);
+  --primary-90: rgba(155, 65, 178, 0.9);
+  --primary-100: #9b41b2;
+  --secondary1-10: rgba(30, 30, 30, 0.1);
+  --secondary1-20: rgba(30, 30, 30, 0.2);
+  --secondary1-40: rgba(30, 30, 30, 0.4);
+  --secondary1-60: rgba(30, 30, 30, 0.6);
+  --secondary1-80: rgba(30, 30, 30, 0.8);
+  --secondary1-900: rgba(30, 30, 30, 0.9);
+  --secondary1-100: #1e1e1e;
   --secondary2: #0cf2b4;
-  --secondary3: #e7e5e5;
+  --secondary3-10: rgb(231, 229, 229, 0.1);
+  --secondary3-20: rgb(231, 229, 229, 0.2);
+  --secondary3-40: rgb(231, 229, 229, 0.4);
+  --secondary3-60: rgb(231, 229, 229, 0.6);
+  --secondary3-80: rgb(231, 229, 229, 0.8);
+  --secondary3-90: rgb(231, 229, 229, 0.9);
+  --secondary3-100: #e7e5e5;
   --secondary4: #f2f2f2;
   --secondary5: #ffffff;
   --error: #b00020;
+
+  --amplify-fonts-default-variable: "Montserrat";
+  --amplify-fonts-default-static: "Montserrat";
+  --amplify-colors-brand-primary-10: var(--primary-10);
+  --amplify-colors-brand-primary-20: var(--primary-20);
+  --amplify-colors-brand-primary-40: var(--primary-40);
+  --amplify-colors-brand-primary-60: var(--primary-60);
+  --amplify-colors-brand-primary-80: var(--primary-80);
+  --amplify-colors-brand-primary-90: var(--primary-90);
+  --amplify-colors-brand-primary-100: var(--primary-100);
+  --amplify-colors-brand-secondary-10: var(--secondary1-10);
+  --amplify-colors-brand-secondary-20: var(--secondary1-20);
+  --amplify-colors-brand-secondary-40: var(--secondary1-40);
+  --amplify-colors-brand-secondary-60: var(--secondary1-60);
+  --amplify-colors-brand-secondary-80: var(--secondary1-80);
+  --amplify-colors-brand-secondary-90: var(--secondary1-90);
+  --amplify-colors-brand-secondary-100: var(--secondary1-100);
+  --amplify-colors-radii-small: 0;
+  --amplify-colors-radii-medium: 2px;
+  --amplify-colors-radii-large: 4px;
+  --amplify-colors-border-primary: var(--primary-40);
+  --amplify-colors-border-secondary: var(--secondary1-20);
+  --amplify-colors-border-tertiary: var(--secondary3-10);
+  --amplify-colors-background-secondary: var(--secondary1-10);
+  --amplify-components-tabs-item-border-color: var(--secondary1-60);
+
+  --amplify-radii-small: 10px;
+  --amplify-radii-medium: 10px;
+  --amplify-radii-large: 10px;
+  --amplify-space-small: 1rem;
+  --amplify-space-medium: 1.5rem;
+  --amplify-space-large: 2rem;
+  --amplify-border-widths-small: 2px;
+  --amplify-border-widths-medium: 2px;
+  --amplify-border-widths-large: 2px;
+}
+
+.amplify-text {
+  font-weight: var(--amplify-font-weights-medium);
+}
+
+.amplify-button .amplify-text {
+  color: var(--primary-60);
 }
 
 h1 {

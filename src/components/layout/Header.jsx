@@ -1,12 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { ReactComponent as ChainsLogo } from "../../assets/images/Artisan_Chains.svg";
 import { ReactComponent as AlarmIcon } from "../../assets/images/alarm_icon.svg";
 import { ReactComponent as SearchIcon } from "../../assets/images/search_icon.svg";
 import { ReactComponent as MenuIcon } from "../../assets/images/menu_icon.svg";
 
-function Header({ username, onClick }) {
+function Header({ onClick }) {
+  const user = useSelector(function (state) {
+    return state.users.currentUser;
+  });
+  const navigate = useNavigate();
+
   return (
     <header className="w-full h-32 flex flex-row justify-between items-center px-5 lg:pl-72 lg:pr-5 fixed top-0 left-0 bg-white z-10">
       <Link
@@ -37,9 +43,14 @@ function Header({ username, onClick }) {
         >
           <MenuIcon />
         </button>
-        <button className="rounded-full w-fit h-10 hidden lg:flex flex-row justify-center items-center p-1 border-2 border-secondary3">
+        <button
+          onClick={function () {
+            navigate("/auth");
+          }}
+          className="rounded-full w-fit h-10 hidden lg:flex flex-row justify-center items-center p-1 border-2 border-secondary3"
+        >
           <div className="rounded-full w-8 h-8 bg-primary"></div>
-          <p className="font-medium mx-5">{username}</p>
+          <p className="font-medium mx-5">{user ? user.username : "Sign in"}</p>
         </button>
       </div>
     </header>

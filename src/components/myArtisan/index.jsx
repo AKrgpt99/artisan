@@ -13,16 +13,16 @@ function MyArtisan() {
 
   return (
     <div className="w-full h-fit">
-      <div className="w-full px-5 lg:pl-72 pt-36 pb-6 bg-white">
+      <div className="w-full px-5 lg:pl-12 pt-36 pb-6 bg-white">
         <h2>MyArtisan</h2>
       </div>
-      <div className="w-full px-5 lg:pl-72 mt-8 flex flex-col justify-center items-start">
+      <div className="w-full px-5 lg:pl-12 mt-8 flex flex-col justify-center items-start">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="flex flex-row justify-center items-center gap-5">
-            <button className="font-semibold px-6 py-2 rounded-full text-white hover:bg-black bg-primary">
+            <button className="font-semibold px-6 py-2 rounded-full text-white transition hover:bg-black bg-primary">
               Create
             </button>
-            <button className="font-semibold px-6 py-2 rounded-full text-primary border-2 border-primary hover:bg-black hover:border-black hover:text-white">
+            <button className="font-semibold px-6 py-2 rounded-full text-primary border-2 border-primary transition hover:bg-black hover:border-black hover:text-white">
               Import
             </button>
           </div>
@@ -31,7 +31,9 @@ function MyArtisan() {
               className={`w-7 h-7 flex justify-center items-center rounded-md ${
                 display === "grid" && "bg-white"
               }`}
-              onClick={() => setDisplay("grid")}
+              onClick={function () {
+                setDisplay("grid");
+              }}
             >
               <PhoneNumberIcon />
             </button>
@@ -39,7 +41,9 @@ function MyArtisan() {
               className={`w-7 h-7 flex justify-center items-center rounded-md ${
                 display === "list" && "bg-white"
               }`}
-              onClick={() => setDisplay("list")}
+              onClick={function () {
+                setDisplay("list");
+              }}
             >
               <ListIcon />
             </button>

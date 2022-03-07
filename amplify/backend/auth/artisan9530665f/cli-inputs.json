@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "artisan4130ebe4_identitypool_4130ebe4",
+    "identityPoolName": "artisan9530665f_identitypool_9530665f",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "artisa4130ebe4",
-    "userPoolName": "artisan4130ebe4_userpool_4130ebe4",
+    "resourceNameTruncated": "artisa9530665f",
+    "userPoolName": "artisan9530665f_userpool_9530665f",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,12 +31,21 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "artisa4130ebe4_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "artisa9530665f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "4130ebe4",
-    "resourceName": "artisan4130ebe4",
+    "sharedId": "9530665f",
+    "resourceName": "artisan9530665f",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
+    "triggers": {},
+    "hostedUIDomainName": "artisan-auth",
+    "authProvidersUserPool": [
+      "Facebook",
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

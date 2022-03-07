@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app";
 import reportWebVitals from "./reportWebVitals";
-import Amplify from "aws-amplify";
-import awsExports from "./aws-exports";
+import { Amplify } from "aws-amplify";
+import awsConfig from "./aws-exports";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 
-Amplify.configure(awsExports);
+Amplify.configure(awsConfig);
 
 ReactDOM.render(
   <Provider store={store}>

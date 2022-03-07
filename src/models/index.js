@@ -4,8 +4,11 @@ import { schema } from './schema';
 
 
 
-const { Todo } = initSchema(schema);
+const { User, NFT, Collection, Incentive } = initSchema(schema);
 
 export {
-  Todo
+  User,
+  NFT,
+  Collection,
+  Incentive
 };

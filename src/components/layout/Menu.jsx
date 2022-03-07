@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { ReactComponent as ChainsLogo } from "../../assets/images/Artisan_Chains.svg";
 import { ReactComponent as AlarmIcon } from "../../assets/images/alarm_icon.svg";
@@ -7,6 +8,8 @@ import { ReactComponent as SearchIcon } from "../../assets/images/search_icon.sv
 import { ReactComponent as CloseIcon } from "../../assets/images/close_icon.svg";
 import { ReactComponent as DoorExitIcon } from "../../assets/images/door_exit_icon.svg";
 import { ReactComponent as DoorExitIconSelected } from "../../assets/images/door_exit_icon--selected.svg";
+import { ReactComponent as DoorEnterIcon } from "../../assets/images/door_enter_icon.svg";
+import { ReactComponent as DoorEnterIconSelected } from "../../assets/images/door_enter_icon--selected.svg";
 
 function Menu({ show, children, onClick }) {
   return (
@@ -63,52 +66,87 @@ function Menu({ show, children, onClick }) {
   );
 }
 
-Menu.Item = function ({ to, location, onClick, children, icon, selectedIcon }) {
+function MenuItem({ to, selected, onClick, children, icon, selectedIcon }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <Link
       to={to}
-      className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 ${
-        location.pathname === to ? "bg-primary" : "bg-white"
+      className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 transition hover:bg-secondary1 hover:text-white ${
+        selected ? "bg-primary" : "bg-white"
       }`}
       onClick={onClick}
+      onMouseEnter={function () {
+        setHovered(true);
+      }}
+      onMouseLeave={function () {
+        setHovered(false);
+      }}
     >
-      {location.pathname === to ? selectedIcon : icon}
-      <p
-        className={`font-medium ${
-          location.pathname === to ? "text-white" : ""
-        }`}
-      >
+      {selected || hovered ? selectedIcon : icon}
+      <p className={`font-medium ${selected ? "text-white" : ""}`}>
         {children}
       </p>
     </Link>
   );
-};
+}
 
-Menu.Items = function ({ location, children, signOut }) {
+Menu.Item = MenuItem;
+
+function MenuItems({ children, signOut, location }) {
+  const [authButtonHovered, setAuthButtonHovered] = useState(false);
+  const user = useSelector(function (state) {
+    return state.users.currentUser;
+  });
+
   return (
     <div className="flex flex-col w-full h-full mt-6 gap-4">
       {children}
-      <button
-        className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 ${
-          location.pathname === "/logout" ? "bg-primary" : "bg-white"
-        }`}
-        onClick={signOut}
-      >
-        {location.pathname === "/logout" ? (
-          <DoorExitIconSelected />
-        ) : (
-          <DoorExitIcon />
-        )}
-        <p
-          className={`font-medium ${
-            location.pathname === "/logout" ? "text-white" : ""
-          }`}
+      {user ? (
+        <button
+          onClick={signOut}
+          className="w-full h-12 flex flex-row justify-start items-center gap-9 px-7 bg-white transition hover:bg-secondary1 hover:text-white"
+          onMouseEnter={function () {
+            setAuthButtonHovered(true);
+          }}
+          onMouseLeave={function () {
+            setAuthButtonHovered(false);
+          }}
         >
-          Logout
-        </p>
-      </button>
+          {authButtonHovered ? <DoorExitIconSelected /> : <DoorExitIcon />}
+          <p className="font-medium">Sign out</p>
+        </button>
+      ) : (
+        <Link
+          to="/auth"
+          className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 transition hover:bg-secondary1 hover:text-white ${
+            location.pathname === "/auth" ? "bg-primary" : "bg-white"
+          }`}
+          onMouseEnter={function () {
+            setAuthButtonHovered(true);
+          }}
+          onMouseLeave={function () {
+            setAuthButtonHovered(false);
+          }}
+        >
+          {location.pathname === "/auth" || authButtonHovered ? (
+            <DoorEnterIconSelected />
+          ) : (
+            <DoorEnterIcon />
+          )}
+          <p
+            className={`font-medium ${
+              location.pathname === "/auth" ? "text-white" : ""
+            }`}
+          >
+            Sign In
+          </p>
+        </Link>
+      )}
     </div>
   );
-};
+}
+
+Menu.Items = MenuItems;
 
 export default Menu;

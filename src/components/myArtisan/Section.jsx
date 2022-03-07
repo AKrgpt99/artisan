@@ -12,12 +12,12 @@ function Section({ title, children, className, display }) {
         className={`w-full flex flex-row justify-between items-center pt-8 ${className}`}
       >
         <button
-          onClick={() => setCollapse(!collapse)}
+          onClick={function () {
+            setCollapse(!collapse);
+          }}
           className="flex flex-row justify-center items-center gap-2"
         >
-          <button onClick={() => setCollapse(!collapse)}>
-            {collapse ? <CollapseIcon /> : <ExpandIcon />}
-          </button>
+          <div>{collapse ? <CollapseIcon /> : <ExpandIcon />}</div>
           <h3 className="">{title}</h3>
         </button>
       </div>
