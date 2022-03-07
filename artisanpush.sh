@@ -98,7 +98,7 @@ CODEGEN="{\
 \"generateDocs\":false\
 }"
 CATEGORIES=""
-if [[ -z ${AMPLIFY_FACEBOOK_CLIENT_ID} && -z ${AMPLIFY_GOOGLE_CLIENT_ID} && -z ${AMPLIFY_AMAZON_CLIENT_ID} ]]; then
+if [[ -z ${AMPLIFY_FACEBOOK_CLIENT_ID} && -z ${AMPLIFY_GOOGLE_CLIENT_ID} ]]; then
     CATEGORIES=""
 else
     AUTHCONFIG="{\

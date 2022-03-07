@@ -34,5 +34,22 @@
       "type": "cicd",
       "lastPushTimeStamp": "2022-03-07T16:36:49.551Z"
     }
+  },
+  "api": {
+    "artisan": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
   }
 }
