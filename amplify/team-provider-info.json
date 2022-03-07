@@ -15,6 +15,12 @@
       "auth": {
         "artisan2330070e": {},
         "artisan9530665f": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3isu78z98q4qo",
+          "type": "cicd"
+        }
       }
     }
   }
