@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Auth } from "aws-amplify";
-import { API, graphqlOperation } from "aws-amplify";
+// import { API, graphqlOperation } from "aws-amplify";
 
-import { getNFT, listNFTS } from "../../graphql/queries";
+// import { getNFT, listNFTS } from "../../graphql/queries";
 
 const initialState = {
   loading: false,
@@ -29,15 +29,15 @@ export const fetchUserNFTs = createAsyncThunk(
 
     try {
       const user = await Auth.currentAuthenticatedUser();
-      const nfts = await API.graphql(
-        graphqlOperation(listNFTS, {
-          filter: { ownerId: { eq: user.attributes.sub } },
-        })
-      );
+      // const nfts = await API.graphql(
+      //   graphqlOperation(listNFTS, {
+      //     filter: { ownerId: { eq: user.attributes.sub } },
+      //   })
+      // );
 
-      console.log(nfts);
+      // console.log(nfts);
 
-      response.data.push(...nfts.data.listNFTS.items);
+      // response.data.push(...nfts.data.listNFTS.items);
 
       return response;
     } catch (err) {
@@ -63,9 +63,9 @@ export const fetchNFTById = createAsyncThunk(
     response.context.pathname = options.location.pathname;
 
     try {
-      const nft = await API.graphql(getNFT, { id: tokenId });
+      // const nft = await API.graphql(getNFT, { id: tokenId });
 
-      response.data.push(nft);
+      // response.data.push(nft);
 
       return response;
     } catch (err) {
@@ -90,11 +90,11 @@ export const fetchNFTsByUser = createAsyncThunk(
     response.context.pathname = options.location.pathname;
 
     try {
-      const nfts = await API.graphql(listNFTS, {
-        filter: { ownerId: { eq: userId } },
-      });
+      // const nfts = await API.graphql(listNFTS, {
+      //   filter: { ownerId: { eq: userId } },
+      // });
 
-      response.data.push(...nfts);
+      // response.data.push(...nfts);
 
       return response;
     } catch (err) {
