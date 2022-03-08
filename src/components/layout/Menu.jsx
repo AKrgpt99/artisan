@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Auth } from "aws-amplify";
 import { useSelector } from "react-redux";
 
 import { ReactComponent as ChainsLogo } from "../../assets/images/Artisan_Chains.svg";
@@ -93,56 +94,48 @@ function MenuItem({ to, selected, onClick, children, icon, selectedIcon }) {
 
 Menu.Item = MenuItem;
 
-function MenuItems({ children, signOut, location }) {
-  const [authButtonHovered, setAuthButtonHovered] = useState(false);
+function MenuItems({ children }) {
+  const [icon, setIcon] = useState(null);
+  const [selectedIcon, setSelectedIcon] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
   const user = useSelector(function (state) {
     return state.users.currentUser;
   });
 
+  useEffect(
+    function () {
+      if (user) {
+        setIcon(<DoorExitIcon />);
+        setSelectedIcon(<DoorExitIconSelected />);
+      } else {
+        setIcon(<DoorEnterIcon />);
+        setSelectedIcon(<DoorEnterIconSelected />);
+      }
+    },
+    [user]
+  );
+
+  function handleClick() {
+    if (user) {
+      Auth.signOut();
+    } else {
+      navigate("/auth");
+    }
+  }
+
   return (
     <div className="flex flex-col w-full h-full mt-6 gap-4">
       {children}
-      {user ? (
-        <button
-          onClick={signOut}
-          className="w-full h-12 flex flex-row justify-start items-center gap-9 px-7 bg-white transition hover:bg-secondary1 hover:text-white"
-          onMouseEnter={function () {
-            setAuthButtonHovered(true);
-          }}
-          onMouseLeave={function () {
-            setAuthButtonHovered(false);
-          }}
-        >
-          {authButtonHovered ? <DoorExitIconSelected /> : <DoorExitIcon />}
-          <p className="font-medium">Sign out</p>
-        </button>
-      ) : (
-        <Link
-          to="/auth"
-          className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 transition hover:bg-secondary1 hover:text-white ${
-            location.pathname === "/auth" ? "bg-primary" : "bg-white"
-          }`}
-          onMouseEnter={function () {
-            setAuthButtonHovered(true);
-          }}
-          onMouseLeave={function () {
-            setAuthButtonHovered(false);
-          }}
-        >
-          {location.pathname === "/auth" || authButtonHovered ? (
-            <DoorEnterIconSelected />
-          ) : (
-            <DoorEnterIcon />
-          )}
-          <p
-            className={`font-medium ${
-              location.pathname === "/auth" ? "text-white" : ""
-            }`}
-          >
-            Sign In
-          </p>
-        </Link>
-      )}
+      <button
+        onClick={handleClick}
+        className={`w-full h-12 flex flex-row justify-start items-center gap-9 px-7 transition hover:bg-secondary1 hover:text-white ${
+          location.pathname === "/auth" ? "bg-primary text-white" : "bg-white"
+        }`}
+      >
+        {location.pathname === "/auth" ? selectedIcon : icon}
+        <p className="font-medium">Sign {user ? "out" : "in"}</p>
+      </button>
     </div>
   );
 }

@@ -5,6 +5,9 @@ export const getUser = /* GraphQL */ `
   query GetUser($sub: ID!) {
     getUser(sub: $sub) {
       sub
+      username
+      email
+      profileURI
       bio
       createdAt
       updatedAt
@@ -28,6 +31,9 @@ export const listUsers = /* GraphQL */ `
     ) {
       items {
         sub
+        username
+        email
+        profileURI
         bio
         createdAt
         updatedAt

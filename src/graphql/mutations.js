@@ -8,6 +8,9 @@ export const createUser = /* GraphQL */ `
   ) {
     createUser(input: $input, condition: $condition) {
       sub
+      username
+      email
+      profileURI
       bio
       createdAt
       updatedAt
@@ -21,6 +24,9 @@ export const updateUser = /* GraphQL */ `
   ) {
     updateUser(input: $input, condition: $condition) {
       sub
+      username
+      email
+      profileURI
       bio
       createdAt
       updatedAt
@@ -34,6 +40,9 @@ export const deleteUser = /* GraphQL */ `
   ) {
     deleteUser(input: $input, condition: $condition) {
       sub
+      username
+      email
+      profileURI
       bio
       createdAt
       updatedAt

@@ -1,19 +1,63 @@
-import React, { useState } from "react";
-import { useLocation, Outlet } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import React, { useEffect, useState } from "react";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
+import { API, graphqlOperation, Hub } from "aws-amplify";
+import { useDispatch } from "react-redux";
 
+import { setUser } from "../../features/users/userSlice";
 import Header from "./Header";
 import Menu from "./Menu";
+
+import { createUser } from "../../graphql/mutations";
 
 function Layout({ routes }) {
   const [show, setShow] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  function signOut() {
-    Auth.signOut().then(function () {
-      console.log("signed out");
-    });
-  }
+  useEffect(
+    function () {
+      Hub.listen("auth", function ({ payload: { event, data } }) {
+        switch (event) {
+          case "signIn":
+            console.log("signed in");
+            navigate("/");
+            dispatch(
+              setUser({
+                username: data.username,
+                email: data.attributes.email,
+                sub: data.attributes.sub,
+              })
+            );
+
+            break;
+          case "signUp":
+            console.log("signed up");
+            navigate("/auth");
+            const userDetails = {
+              username: data.user.username,
+              sub: data.userSub,
+            };
+
+            API.graphql(graphqlOperation(createUser, { input: userDetails }))
+              .then(function () {
+                dispatch(setUser(userDetails));
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+
+            break;
+          case "signOut":
+            console.log("signed out");
+            navigate("/");
+            dispatch(setUser(null));
+            break;
+        }
+      });
+    },
+    [navigate]
+  );
 
   return (
     <div className="landing-page flex flex-row">
@@ -23,14 +67,15 @@ function Layout({ routes }) {
           setShow(false);
         }}
       >
-        <Menu.Items signOut={signOut} location={location}>
-          {routes.map(function ({ name, path, icons }) {
+        <Menu.Items>
+          {routes.map(function ({ name, path, icons }, i) {
             return (
               <Menu.Item
                 to={`/${path}`}
                 icon={icons.regular}
                 selectedIcon={icons.selected}
                 selected={location.pathname === `/${path}`}
+                key={i}
               >
                 {name}
               </Menu.Item>
