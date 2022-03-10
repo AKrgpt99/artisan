@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 
 import { setUser } from "../../features/users/userSlice";
 import Header from "./Header";
-import Menu from "./Menu";
+import Menu from "./menu";
 
 import { createUser } from "../../graphql/mutations";
+import { getUser } from "../../graphql/queries";
 
 function Layout({ routes }) {
   const [show, setShow] = useState(false);
@@ -21,37 +22,39 @@ function Layout({ routes }) {
         switch (event) {
           case "signIn":
             console.log("signed in");
-            navigate("/");
-            dispatch(
-              setUser({
-                username: data.username,
-                email: data.attributes.email,
-                sub: data.attributes.sub,
-              })
-            );
-
-            break;
-          case "signUp":
-            console.log("signed up");
-            navigate("/auth");
             const userDetails = {
-              username: data.user.username,
-              sub: data.userSub,
+              username: data.username,
+              email: data.attributes.email,
+              sub: data.attributes.sub,
             };
-
-            API.graphql(graphqlOperation(createUser, { input: userDetails }))
-              .then(function () {
-                dispatch(setUser(userDetails));
+            // check db
+            API.graphql(graphqlOperation(getUser, { sub: userDetails.sub }))
+              .then(function ({ data }) {
+                if (!data.getUser) {
+                  API.graphql(
+                    graphqlOperation(createUser, { input: { ...userDetails } })
+                  );
+                  console.log("created user");
+                } else {
+                  console.log(data.getUser);
+                }
               })
               .catch(function (error) {
                 console.log(error);
               });
 
+            // set local state
+            dispatch(setUser(userDetails));
+
+            navigate("/");
+            break;
+          case "signUp":
+            console.log("signed up");
             break;
           case "signOut":
             console.log("signed out");
-            navigate("/");
             dispatch(setUser(null));
+            navigate("/");
             break;
         }
       });
@@ -76,6 +79,9 @@ function Layout({ routes }) {
                 selectedIcon={icons.selected}
                 selected={location.pathname === `/${path}`}
                 key={i}
+                onClick={function () {
+                  setShow(false);
+                }}
               >
                 {name}
               </Menu.Item>

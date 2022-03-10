@@ -3,10 +3,45 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type User @model @auth(rules: [{ allow: public }]) @searchable {
+type User
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @searchable {
   sub: ID! @primaryKey
   username: String!
   email: String
   profileURI: String
   bio: String
+  tokens: [Token] @hasMany
+  collections: [Collection] @hasMany
+}
+
+type Token
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @searchable {
+  id: ID! @primaryKey
+  owner: User! @belongsTo
+  collection: Collection @belongsTo
+  contentURI: String!
+  price: Float
+  royalty: Float
+  supply: Int!
+  name: String!
+  description: String!
+  unlockable: String
+  external: String
+  explicit: Boolean
+  traits: [String]
+}
+
+type Collection
+  @model
+  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @searchable {
+  id: ID! @primaryKey
+  owner: User! @belongsTo
+  tokens: [Token] @hasMany
+  name: String!
+  description: String!
 }

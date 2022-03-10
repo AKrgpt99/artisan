@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "artisan",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authartisan9530665f",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
