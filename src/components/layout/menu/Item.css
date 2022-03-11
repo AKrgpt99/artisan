@@ -1,0 +1,45 @@
+@keyframes fadeInLabel {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutLabel {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.label-enter {
+  opacity: 0;
+}
+
+.label-enter-active {
+  animation: fadeInLabel 150ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.label-enter-done {
+  opacity: 1;
+}
+
+.label-exit {
+  opacity: 1;
+}
+
+.label-exit-active {
+  animation: fadeOutLabel 150ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.label-exit-done {
+  opacity: 0;
+}

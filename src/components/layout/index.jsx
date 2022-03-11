@@ -6,18 +6,24 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../features/users/userSlice";
 import Header from "./Header";
 import Menu from "./menu";
+import Page from "./page";
 
 import { createUser } from "../../graphql/mutations";
 import { getUser } from "../../graphql/queries";
 
 function Layout({ routes }) {
   const [show, setShow] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(
     function () {
+      if (window.innerWidth <= 1024) {
+        setExpanded(true);
+      }
+
       Hub.listen("auth", function ({ payload: { event, data } }) {
         switch (event) {
           case "signIn":
@@ -56,6 +62,9 @@ function Layout({ routes }) {
             dispatch(setUser(null));
             navigate("/");
             break;
+          default:
+            navigate("/");
+            break;
         }
       });
     },
@@ -64,24 +73,25 @@ function Layout({ routes }) {
 
   return (
     <div className="landing-page flex flex-row">
-      <Menu
-        show={show}
-        onClick={function () {
-          setShow(false);
-        }}
-      >
-        <Menu.Items>
-          {routes.map(function ({ name, path, icons }, i) {
+      <Menu show={show} expanded={expanded}>
+        <Menu.Items
+          expanded={expanded}
+          handleExpand={function () {
+            setExpanded(!expanded);
+          }}
+        >
+          {routes.map(function ({ name, path, icon }, i) {
             return (
               <Menu.Item
                 to={`/${path}`}
-                icon={icons.regular}
-                selectedIcon={icons.selected}
+                icon={icon}
                 selected={location.pathname === `/${path}`}
                 key={i}
                 onClick={function () {
                   setShow(false);
+                  setExpanded(false);
                 }}
+                expanded={expanded}
               >
                 {name}
               </Menu.Item>
@@ -92,13 +102,16 @@ function Layout({ routes }) {
       <div className="w-full pb-12">
         <Header
           onClick={function () {
-            setShow(true);
+            setShow(!show);
           }}
+          showMenu={show}
         />
         <Outlet />
       </div>
     </div>
   );
 }
+
+Layout.Page = Page;
 
 export default Layout;

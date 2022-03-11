@@ -1,46 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CloseIcon from "../../assets/images/close_icon.svg";
+
+import Form from "../form";
 
 function TraitModal({ onClose, onAdd }) {
   const [selected, setSelected] = useState("quality");
   const [type, setType] = useState("");
   const [name, setName] = useState("");
   const [value, setValue] = useState(0);
+  const [errors, setErrors] = useState({});
 
-  function handleClick() {
+  function handleSubmit() {
+    let _key;
+    let _value;
+    let tempErrors = {};
+
     if (selected === "quality") {
-      onAdd(`${type}:${name}`);
+      if (type === "") {
+        tempErrors.type = "Cannot be empty.";
+      } else {
+        _key = type;
+      }
+
+      if (name === "") {
+        tempErrors.name = "Cannot be empty.";
+      } else {
+        _value = name;
+      }
     } else {
-      onAdd(`${name}:${value}`);
+      if (name === "") {
+        tempErrors.name = "Cannot be empty.";
+      } else {
+        _key = name;
+      }
+
+      if (!value || value === "") {
+        tempErrors.value = "Cannot be empty.";
+      } else {
+        _value = value;
+      }
     }
-    onClose();
+
+    if (tempErrors === {}) {
+      onAdd(`${_key}:${_value}`);
+      onClose();
+    } else {
+      setErrors(tempErrors);
+    }
   }
 
   return (
     <div className="fixed p-5 w-screen h-screen top-0 left-0 bg-secondary1/50 z-50 flex justify-center items-center transition">
       <div className="w-full lg:w-[34rem] h-fit bg-white rounded-xl transition flex flex-col justify-start items-start p-5">
         <div className="w-full flex flex-row justify-between items-center">
-          <h3 className="text-primary ml-2">Add Trait</h3>
+          <h3 className="text-primary ml-2 font-bold">Add Trait</h3>
           <button onClick={onClose}>
             <img src={CloseIcon} alt="close" />
           </button>
         </div>
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 flex flex-row justify-between items-center gap-7 px-2 mt-7">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 flex flex-row justify-between items-center gap-5 px-2 mt-5">
           <button
             onClick={function () {
               setSelected("quality");
             }}
-            className={`h-40 w-full border-2 border-primary rounded-xl flex flex-col justify-start items-start transition hover:bg-primary/25 ${
+            className={`h-36 w-full border-2 border-primary rounded-xl flex flex-col justify-start items-start transition hover:bg-primary/25 ${
               selected === "quality" && "bg-primary/25"
             }`}
           >
-            <div className="w-full p-5 text-left">
+            <div className="w-full px-5 pt-5 pb-3 text-left">
               <h6>Quality</h6>
             </div>
             <div className="w-full px-5 pb-5 text-left">
               <p className="font-light">
-                Add a textual trait that defines a quality about this NFT.
+                Add a textual trait like color or status.
               </p>
             </div>
           </button>
@@ -48,83 +81,84 @@ function TraitModal({ onClose, onAdd }) {
             onClick={function () {
               setSelected("quantity");
             }}
-            className={`h-40 w-full border-2 border-primary rounded-xl flex flex-col justify-start items-start transition hover:bg-primary/25 ${
+            className={`h-36 w-full border-2 border-primary rounded-xl flex flex-col justify-start items-start transition hover:bg-primary/25 ${
               selected === "quantity" && "bg-primary/25"
             }`}
           >
-            <div className="w-full p-5 text-left">
+            <div className="w-full px-5 pt-5 pb-3 text-left">
               <h6>Quantity</h6>
             </div>
             <div className="w-full px-5 pb-5 text-left">
               <p className="font-light">
-                Add a numerical trait like rating or level.
+                Add a numerical trait like rating or speed.
               </p>
             </div>
           </button>
         </div>
         {selected === "quality" ? (
           <div className="w-full flex flex-col px-2">
-            <div className="w-full flex flex-col justify-center items-start mt-10 gap-2.5">
-              <label className="font-medium">Type</label>
-              <p className="text-sm">A label for this trait.</p>
-              <input
-                className="w-full h-11 rounded-lg px-5 drop-shadow-md"
-                type="text"
+            <Form.Group className="mt-4">
+              <Form.Label error={errors.type}>Type</Form.Label>
+              <Form.Label.Description>
+                A label for this trait.
+              </Form.Label.Description>
+              <Form.Input.Text
                 placeholder="Size"
                 value={type}
                 onChange={function (event) {
                   setType(event.target.value);
                 }}
+                error={errors.type}
               />
-            </div>
-            <div className="w-full flex flex-col justify-center items-start mt-6 gap-2.5">
-              <label className="font-medium ">Name</label>
-              <p className="text-sm">What the trait will be called.</p>
-              <input
-                className="w-full h-11 rounded-lg px-5 drop-shadow-md"
-                type="text"
-                placeholder="Small"
-                defaultValue={""}
+            </Form.Group>
+            <Form.Group className="mt-5">
+              <Form.Label error={errors.name}>Name</Form.Label>
+              <Form.Label.Description>
+                What the trait will be called.
+              </Form.Label.Description>
+              <Form.Input.Text
                 value={name}
+                placeholder="Small"
                 onChange={function (event) {
                   setName(event.target.value);
                 }}
+                error={errors.name}
               />
-            </div>
+            </Form.Group>
           </div>
         ) : (
           <div className="w-full flex flex-col px-2">
-            <div className="w-full flex flex-col justify-center items-start mt-10 gap-2.5">
-              <label className="font-medium ">Name</label>
-              <p className="text-sm">What the trait will be called.</p>
-              <input
-                className="w-full h-11 rounded-lg px-5 drop-shadow-md"
-                type="text"
-                placeholder="Beats per minute"
+            <Form.Group className="mt-4">
+              <Form.Label error={errors.name}>Name</Form.Label>
+              <Form.Label.Description>
+                What the trait will be called.
+              </Form.Label.Description>
+              <Form.Input.Text
                 value={name}
                 onChange={function (event) {
                   setName(event.target.value);
                 }}
+                placeholder="Beats per minute"
+                error={errors.type}
               />
-            </div>
-            <div className="w-full flex flex-col justify-center items-start mt-6 gap-2.5">
-              <label className="font-medium ">Value</label>
-              <p className="text-sm">Define a number for this trait.</p>
-              <input
-                className="w-full h-11 rounded-lg px-5 drop-shadow-md"
-                type="number"
-                defaultValue={0}
+            </Form.Group>
+            <Form.Group className="mt-5">
+              <Form.Label error={errors.value}>Value</Form.Label>
+              <Form.Label.Description>
+                Define a number for this trait.
+              </Form.Label.Description>
+              <Form.Input.Number
                 value={value}
                 onChange={function (event) {
                   setValue(event.target.value);
                 }}
               />
-            </div>
+            </Form.Group>
           </div>
         )}
         <div className="w-full flex flex-row px-2 justify-end mt-7">
           <button
-            onClick={handleClick}
+            onClick={handleSubmit}
             className="px-5 h-9 flex justify-center items-center bg-primary rounded-full text-white transition hover:bg-secondary1"
           >
             Add Trait

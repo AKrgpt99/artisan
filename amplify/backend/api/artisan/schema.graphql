@@ -5,23 +5,40 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type User
   @model
-  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read, update] }
+      { allow: owner, ownerField: "sub" }
+    ]
+  )
   @searchable {
   sub: ID! @primaryKey
   username: String!
   email: String
   profileURI: String
   bio: String
-  tokens: [Token] @hasMany
-  collections: [Collection] @hasMany
+  ownedTokens: [Token] @manyToMany(relationName: "TokenOwners")
+  createdTokens: [Token] @hasMany
+  likedTokens: [Token] @manyToMany(relationName: "UserTokenLikes")
+  createdCollections: [Collection] @hasMany
+  likedCollections: [Collection]
+    @manyToMany(relationName: "UserCollectionLikes")
 }
 
 type Token
   @model
-  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read, update] }
+      { allow: owner, ownerField: "creator" }
+    ]
+  )
   @searchable {
   id: ID! @primaryKey
-  owner: User! @belongsTo
+  owners: [User!]! @manyToMany(relationName: "TokenOwners")
+  creator: User! @belongsTo
   collection: Collection @belongsTo
   contentURI: String!
   price: Float
@@ -33,15 +50,34 @@ type Token
   external: String
   explicit: Boolean
   traits: [String]
+  views: Int
+  likes: [User] @manyToMany(relationName: "UserTokenLikes")
 }
 
 type Collection
   @model
-  @auth(rules: [{ allow: public, operations: [read] }, { allow: private }])
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read, update] }
+      { allow: owner, ownerField: "creator" }
+    ]
+  )
   @searchable {
   id: ID! @primaryKey
-  owner: User! @belongsTo
+  creator: User! @belongsTo
   tokens: [Token] @hasMany
+  logoURI: String
+  featuredURI: String
+  bannerURI: String
   name: String!
-  description: String!
+  slug: String!
+  description: String
+  category: String
+  externals: [String]
+  royalty: Float
+  paymentTokens: [String]
+  explicit: Boolean
+  views: Int
+  likes: [User] @manyToMany(relationName: "UserCollectionLikes")
 }

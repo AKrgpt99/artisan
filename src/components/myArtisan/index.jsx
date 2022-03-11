@@ -1,98 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Section from "./Section";
 import Tile from "./Tile";
 
-import { ReactComponent as PhoneNumberIcon } from "../../assets/images/phone_number_icon.svg";
-import { ReactComponent as ListIcon } from "../../assets/images/list_icon.svg";
 import NFT1 from "../../assets/images/nft1.png";
 import NFT2 from "../../assets/images/nft2.png";
-import CreateModal from "./CreateModal";
-import ImportModal from "./ImportModal";
+import Layout from "../layout";
 
 function MyArtisan() {
-  const [display, setDisplay] = useState("grid");
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [showImportModal, setShowImportModal] = useState(false);
-
   return (
-    <div className="w-full h-fit">
-      <div className="w-full px-5 lg:pl-12 pt-36 pb-6 bg-white">
-        <h2>MyArtisan</h2>
-      </div>
-      {showCreateModal && (
-        <CreateModal
-          onClose={function () {
-            setShowCreateModal(false);
-          }}
-        />
-      )}
-      {showImportModal && (
-        <ImportModal
-          onClose={function () {
-            setShowImportModal(false);
-          }}
-        />
-      )}
-      <div className="w-full px-5 lg:pl-12 mt-8 flex flex-col justify-center items-start">
-        <div className="w-full flex flex-row justify-between items-center">
-          <div className="flex flex-row justify-center items-center gap-5">
-            <button
-              onClick={function () {
-                setShowCreateModal(true);
-              }}
-              className="font-semibold px-6 py-2 rounded-full text-white border-2 border-primary hover:border-black transition hover:bg-black bg-primary"
-            >
-              Create
-            </button>
-            <button
-              onClick={function () {
-                setShowImportModal(true);
-              }}
-              className="font-semibold px-6 py-2 rounded-full text-primary border-2 border-primary transition hover:bg-black hover:border-black hover:text-white"
-            >
-              Import
-            </button>
-          </div>
-          <div className="flex flex-row justify-center items-center gap-4">
-            <button
-              className={`w-7 h-7 flex justify-center items-center rounded-md ${
-                display === "grid" && "bg-white"
-              }`}
-              onClick={function () {
-                setDisplay("grid");
-              }}
-            >
-              <PhoneNumberIcon />
-            </button>
-            <button
-              className={`w-7 h-7 flex justify-center items-center rounded-md ${
-                display === "list" && "bg-white"
-              }`}
-              onClick={function () {
-                setDisplay("list");
-              }}
-            >
-              <ListIcon />
-            </button>
-          </div>
-        </div>
-        <Section title={`Collections (${1})`} display={display}>
-          <Tile.Collection
-            img={
-              <img
-                src={NFT1}
-                className="object-cover w-full h-full rounded-xl"
-              />
-            }
-            title="Collection Title"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            numNFTs={1}
-            display={display}
-          />
-        </Section>
-        <Section title={`NFTs (${1})`} className="mt-6" display={display}>
+    <Layout.Page>
+      <Layout.Page.Header>MyArtisan</Layout.Page.Header>
+      <Layout.Page.Container>
+        <Section>
           <Tile.NFT
             img={
               <img
@@ -103,16 +23,35 @@ function MyArtisan() {
             title="NFT Title"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            price={0.01}
-            royalty={5}
-            numUnlockables={1}
-            numUtilities={1}
             isFreePromotion
-            display={display}
+            likes={32}
+            views={76}
           />
         </Section>
-      </div>
-    </div>
+        <Section title={`Collections (${1})`} className="mt-16">
+          {/* <Tile.Collection
+            logoImg={
+              <img
+                src={NFT1}
+                className="object-cover w-24 h-24 lg:w-16 lg:h-16 rounded-full absolute top-[11rem] lg:top-[9rem] z-20"
+              />
+            }
+            img={
+              <img
+                src={NFT2}
+                className="object-contain w-full h-52 lg:h-36 rounded-xl"
+              />
+            }
+            title="Collection Title"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            numNFTs={1}
+            likes={32}
+            views={76}
+          /> */}
+        </Section>
+      </Layout.Page.Container>
+    </Layout.Page>
   );
 }
 

@@ -9,7 +9,19 @@ export const getUser = /* GraphQL */ `
       email
       profileURI
       bio
-      tokens {
+      ownedTokens {
+        items {
+          id
+          userID
+          tokenID
+          createdAt
+          updatedAt
+          sub
+          creator
+        }
+        nextToken
+      }
+      createdTokens {
         items {
           id
           contentURI
@@ -22,21 +34,56 @@ export const getUser = /* GraphQL */ `
           external
           explicit
           traits
+          views
           createdAt
           updatedAt
-          userTokensId
+          userCreatedTokensId
           collectionTokensId
         }
         nextToken
       }
-      collections {
+      likedTokens {
         items {
           id
-          name
-          description
+          userID
+          tokenID
           createdAt
           updatedAt
-          userCollectionsId
+          sub
+          creator
+        }
+        nextToken
+      }
+      createdCollections {
+        items {
+          id
+          logoURI
+          featuredURI
+          bannerURI
+          name
+          slug
+          description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
+          createdAt
+          updatedAt
+          userCreatedCollectionsId
+        }
+        nextToken
+      }
+      likedCollections {
+        items {
+          id
+          userID
+          collectionID
+          createdAt
+          updatedAt
+          sub
+          creator
         }
         nextToken
       }
@@ -66,10 +113,19 @@ export const listUsers = /* GraphQL */ `
         email
         profileURI
         bio
-        tokens {
+        ownedTokens {
           nextToken
         }
-        collections {
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
           nextToken
         }
         createdAt
@@ -102,10 +158,19 @@ export const searchUsers = /* GraphQL */ `
         email
         profileURI
         bio
-        tokens {
+        ownedTokens {
           nextToken
         }
-        collections {
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
           nextToken
         }
         createdAt
@@ -134,16 +199,37 @@ export const getToken = /* GraphQL */ `
   query GetToken($id: ID!) {
     getToken(id: $id) {
       id
-      owner {
+      owners {
+        items {
+          id
+          userID
+          tokenID
+          createdAt
+          updatedAt
+          sub
+          creator
+        }
+        nextToken
+      }
+      creator {
         sub
         username
         email
         profileURI
         bio
-        tokens {
+        ownedTokens {
           nextToken
         }
-        collections {
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
           nextToken
         }
         createdAt
@@ -151,7 +237,7 @@ export const getToken = /* GraphQL */ `
       }
       collection {
         id
-        owner {
+        creator {
           sub
           username
           email
@@ -163,11 +249,24 @@ export const getToken = /* GraphQL */ `
         tokens {
           nextToken
         }
+        logoURI
+        featuredURI
+        bannerURI
         name
+        slug
         description
+        category
+        externals
+        royalty
+        paymentTokens
+        explicit
+        views
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
-        userCollectionsId
+        userCreatedCollectionsId
       }
       contentURI
       price
@@ -179,9 +278,22 @@ export const getToken = /* GraphQL */ `
       external
       explicit
       traits
+      views
+      likes {
+        items {
+          id
+          userID
+          tokenID
+          createdAt
+          updatedAt
+          sub
+          creator
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      userTokensId
+      userCreatedTokensId
       collectionTokensId
     }
   }
@@ -203,7 +315,10 @@ export const listTokens = /* GraphQL */ `
     ) {
       items {
         id
-        owner {
+        owners {
+          nextToken
+        }
+        creator {
           sub
           username
           email
@@ -214,11 +329,21 @@ export const listTokens = /* GraphQL */ `
         }
         collection {
           id
+          logoURI
+          featuredURI
+          bannerURI
           name
+          slug
           description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
           createdAt
           updatedAt
-          userCollectionsId
+          userCreatedCollectionsId
         }
         contentURI
         price
@@ -230,9 +355,13 @@ export const listTokens = /* GraphQL */ `
         external
         explicit
         traits
+        views
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
-        userTokensId
+        userCreatedTokensId
         collectionTokensId
       }
       nextToken
@@ -258,7 +387,10 @@ export const searchTokens = /* GraphQL */ `
     ) {
       items {
         id
-        owner {
+        owners {
+          nextToken
+        }
+        creator {
           sub
           username
           email
@@ -269,11 +401,21 @@ export const searchTokens = /* GraphQL */ `
         }
         collection {
           id
+          logoURI
+          featuredURI
+          bannerURI
           name
+          slug
           description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
           createdAt
           updatedAt
-          userCollectionsId
+          userCreatedCollectionsId
         }
         contentURI
         price
@@ -285,9 +427,13 @@ export const searchTokens = /* GraphQL */ `
         external
         explicit
         traits
+        views
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
-        userTokensId
+        userCreatedTokensId
         collectionTokensId
       }
       nextToken
@@ -313,16 +459,25 @@ export const getCollection = /* GraphQL */ `
   query GetCollection($id: ID!) {
     getCollection(id: $id) {
       id
-      owner {
+      creator {
         sub
         username
         email
         profileURI
         bio
-        tokens {
+        ownedTokens {
           nextToken
         }
-        collections {
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
           nextToken
         }
         createdAt
@@ -341,18 +496,41 @@ export const getCollection = /* GraphQL */ `
           external
           explicit
           traits
+          views
           createdAt
           updatedAt
-          userTokensId
+          userCreatedTokensId
           collectionTokensId
         }
         nextToken
       }
+      logoURI
+      featuredURI
+      bannerURI
       name
+      slug
       description
+      category
+      externals
+      royalty
+      paymentTokens
+      explicit
+      views
+      likes {
+        items {
+          id
+          userID
+          collectionID
+          createdAt
+          updatedAt
+          sub
+          creator
+        }
+        nextToken
+      }
       createdAt
       updatedAt
-      userCollectionsId
+      userCreatedCollectionsId
     }
   }
 `;
@@ -373,7 +551,7 @@ export const listCollections = /* GraphQL */ `
     ) {
       items {
         id
-        owner {
+        creator {
           sub
           username
           email
@@ -385,11 +563,24 @@ export const listCollections = /* GraphQL */ `
         tokens {
           nextToken
         }
+        logoURI
+        featuredURI
+        bannerURI
         name
+        slug
         description
+        category
+        externals
+        royalty
+        paymentTokens
+        explicit
+        views
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
-        userCollectionsId
+        userCreatedCollectionsId
       }
       nextToken
     }
@@ -414,7 +605,7 @@ export const searchCollections = /* GraphQL */ `
     ) {
       items {
         id
-        owner {
+        creator {
           sub
           username
           email
@@ -426,11 +617,24 @@ export const searchCollections = /* GraphQL */ `
         tokens {
           nextToken
         }
+        logoURI
+        featuredURI
+        bannerURI
         name
+        slug
         description
+        category
+        externals
+        royalty
+        paymentTokens
+        explicit
+        views
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
-        userCollectionsId
+        userCreatedCollectionsId
       }
       nextToken
       total
@@ -448,6 +652,397 @@ export const searchCollections = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const getTokenOwners = /* GraphQL */ `
+  query GetTokenOwners($id: ID!) {
+    getTokenOwners(id: $id) {
+      id
+      userID
+      tokenID
+      user {
+        sub
+        username
+        email
+        profileURI
+        bio
+        ownedTokens {
+          nextToken
+        }
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      token {
+        id
+        owners {
+          nextToken
+        }
+        creator {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        collection {
+          id
+          logoURI
+          featuredURI
+          bannerURI
+          name
+          slug
+          description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
+          createdAt
+          updatedAt
+          userCreatedCollectionsId
+        }
+        contentURI
+        price
+        royalty
+        supply
+        name
+        description
+        unlockable
+        external
+        explicit
+        traits
+        views
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCreatedTokensId
+        collectionTokensId
+      }
+      createdAt
+      updatedAt
+      sub
+      creator
+    }
+  }
+`;
+export const listTokenOwners = /* GraphQL */ `
+  query ListTokenOwners(
+    $filter: ModelTokenOwnersFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTokenOwners(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        tokenID
+        user {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        token {
+          id
+          contentURI
+          price
+          royalty
+          supply
+          name
+          description
+          unlockable
+          external
+          explicit
+          traits
+          views
+          createdAt
+          updatedAt
+          userCreatedTokensId
+          collectionTokensId
+        }
+        createdAt
+        updatedAt
+        sub
+        creator
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserTokenLikes = /* GraphQL */ `
+  query GetUserTokenLikes($id: ID!) {
+    getUserTokenLikes(id: $id) {
+      id
+      userID
+      tokenID
+      user {
+        sub
+        username
+        email
+        profileURI
+        bio
+        ownedTokens {
+          nextToken
+        }
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      token {
+        id
+        owners {
+          nextToken
+        }
+        creator {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        collection {
+          id
+          logoURI
+          featuredURI
+          bannerURI
+          name
+          slug
+          description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
+          createdAt
+          updatedAt
+          userCreatedCollectionsId
+        }
+        contentURI
+        price
+        royalty
+        supply
+        name
+        description
+        unlockable
+        external
+        explicit
+        traits
+        views
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCreatedTokensId
+        collectionTokensId
+      }
+      createdAt
+      updatedAt
+      sub
+      creator
+    }
+  }
+`;
+export const listUserTokenLikes = /* GraphQL */ `
+  query ListUserTokenLikes(
+    $filter: ModelUserTokenLikesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserTokenLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        tokenID
+        user {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        token {
+          id
+          contentURI
+          price
+          royalty
+          supply
+          name
+          description
+          unlockable
+          external
+          explicit
+          traits
+          views
+          createdAt
+          updatedAt
+          userCreatedTokensId
+          collectionTokensId
+        }
+        createdAt
+        updatedAt
+        sub
+        creator
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserCollectionLikes = /* GraphQL */ `
+  query GetUserCollectionLikes($id: ID!) {
+    getUserCollectionLikes(id: $id) {
+      id
+      userID
+      collectionID
+      user {
+        sub
+        username
+        email
+        profileURI
+        bio
+        ownedTokens {
+          nextToken
+        }
+        createdTokens {
+          nextToken
+        }
+        likedTokens {
+          nextToken
+        }
+        createdCollections {
+          nextToken
+        }
+        likedCollections {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      collection {
+        id
+        creator {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        tokens {
+          nextToken
+        }
+        logoURI
+        featuredURI
+        bannerURI
+        name
+        slug
+        description
+        category
+        externals
+        royalty
+        paymentTokens
+        explicit
+        views
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCreatedCollectionsId
+      }
+      createdAt
+      updatedAt
+      sub
+      creator
+    }
+  }
+`;
+export const listUserCollectionLikes = /* GraphQL */ `
+  query ListUserCollectionLikes(
+    $filter: ModelUserCollectionLikesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserCollectionLikes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        collectionID
+        user {
+          sub
+          username
+          email
+          profileURI
+          bio
+          createdAt
+          updatedAt
+        }
+        collection {
+          id
+          logoURI
+          featuredURI
+          bannerURI
+          name
+          slug
+          description
+          category
+          externals
+          royalty
+          paymentTokens
+          explicit
+          views
+          createdAt
+          updatedAt
+          userCreatedCollectionsId
+        }
+        createdAt
+        updatedAt
+        sub
+        creator
+      }
+      nextToken
     }
   }
 `;

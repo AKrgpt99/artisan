@@ -1,0 +1,5 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="black" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 44H16C24 44 32 36 40 36C48 36 48 44 56 44" stroke="inherit" stroke-miterlimit="5"/>
+<path d="M56 8H8V56H56V8Z" stroke="inherit" stroke-miterlimit="5"/>
+<path d="M22 28C25.3137 28 28 25.3137 28 22C28 18.6863 25.3137 16 22 16C18.6863 16 16 18.6863 16 22C16 25.3137 18.6863 28 22 28Z" stroke="inherit" stroke-miterlimit="5"/>
+</svg>

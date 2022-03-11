@@ -1,0 +1,138 @@
+@keyframes expandMenu {
+  0% {
+    width: 5.5rem;
+  }
+
+  100% {
+    width: 16rem;
+  }
+}
+
+@keyframes collapseMenu {
+  0% {
+    width: 16rem;
+  }
+
+  100% {
+    width: 5.5rem;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    left: -100vw;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100vw;
+  }
+}
+
+.menu-enter {
+  width: 5.5rem;
+}
+
+.menu-enter-active {
+  animation: expandMenu 250ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.menu-enter-done {
+  width: 16rem;
+}
+
+.menu-exit {
+  width: 16rem;
+}
+
+.menu-exit-active {
+  animation: collapseMenu 250ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.menu-exit-done {
+  width: 5.5rem;
+}
+
+.logo-enter {
+  opacity: 0;
+}
+
+.logo-enter-active {
+  animation: fadeIn 150ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.logo-enter-done {
+  opacity: 1;
+}
+
+.logo-exit {
+  opacity: 1;
+}
+
+.logo-exit-active {
+  animation: fadeOut 150ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.logo-exit-done {
+  opacity: 0;
+}
+
+.mobile-menu-enter {
+  left: -100vw;
+}
+
+.mobile-menu-enter-active {
+  animation: slideIn 250ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.mobile-menu-enter-done {
+  left: 0;
+}
+
+.mobile-menu-exit {
+  left: 0;
+}
+
+.mobile-menu-exit-active {
+  animation: slideOut 250ms ease-in-out;
+  animation-delay: 50ms;
+}
+
+.mobile-menu-exit-done {
+  left: -100vw;
+}
+/*16rem,5.5rem*/

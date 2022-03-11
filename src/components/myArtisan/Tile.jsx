@@ -1,99 +1,90 @@
 import React from "react";
 
+import HeartIcon from "../../assets/images/heart1.svg";
+import VisibleIcon from "../../assets/images/visible.svg";
+
 function Tile({
   img,
+  logoImg,
   title,
   description,
   children,
   isFreePromotion,
-  display,
-  isLargeListItem,
+  views,
+  likes,
 }) {
   return (
-    <>
-      {display === "grid" ? (
-        <button className="bg-white h-auto rounded-xl flex flex-col justify-start items-center p-5 relative z-0">
-          <div className="w-full h-fit flex justify-center items-center">
-            {img}
-            {isFreePromotion && (
-              <div className="absolute top-10 left-0 w-32 h-7 flex justify-center items-center bg-secondary2">
-                <p className="tag">Promoted Free</p>
-              </div>
-            )}
+    <button className="bg-white h-auto rounded-xl flex flex-col justify-start items-center pb-5 relative z-0 shadow-xl">
+      <div className="h-8 w-full bg-secondary1/[0.125] rounded-t-xl px-5 flex flex-row justify-end items-center gap-4">
+        <div className="flex flex-row items-center gap-1">
+          <img src={HeartIcon} alt="likes" className="w-5 h-5" />
+          <p className="text-xs font-bold text-secondary1/50">{likes}</p>
+        </div>
+        <div className="flex flex-row items-center gap-1">
+          <img src={VisibleIcon} alt="views" className="w-5 h-5" />
+          <p className="text-xs font-bold text-secondary1/50">{views}</p>
+        </div>
+      </div>
+      <div className="w-full h-fit flex justify-center items-center mt-5 px-5">
+        {img}
+        {logoImg}
+        {isFreePromotion && (
+          <div className="absolute top-16 left-0 w-32 h-7 flex justify-center items-center bg-secondary2">
+            <p className="tag">Promoted Free</p>
           </div>
-          <div className="w-full flex flex-col justify-center items-center pt-7 pb-2 gap-2">
-            <h6 className="w-full text-left text-primary">{title}</h6>
-            <p className="w-full text-left">{description}</p>
-          </div>
-          <hr className="w-full mt-2 text-secondary3" />
-          {children}
-          {isFreePromotion && (
-            <div className="w-full flex flex-row justify-center items-center pt-5">
-              <button className="w-56 h-9 flex justify-center items-center font-semibold rounded-full border-2 border-secondary2 hover:bg-black hover:border-black hover:text-white">
-                Upgrade Promotion
-              </button>
-            </div>
-          )}
-        </button>
-      ) : (
-        <button className="w-full rounded-xl bg-white flex flex-col p-5 relative z-0">
-          <div className="w-full flex flex-row justify-start items-center gap-3.5">
-            <div
-              className={`${
-                isLargeListItem ? "w-28 h-28" : "w-16 h-16"
-              } flex justify-center items-center`}
-            >
-              {img}
-              {isFreePromotion && (
-                <div className="absolute top-10 left-0 w-32 h-7 flex justify-center items-center bg-secondary2">
-                  <p className="tag">Promoted Free</p>
-                </div>
-              )}
-            </div>
-            <div
-              className={`flex flex-col justify-between items-start ${
-                isLargeListItem ? "h-28 w-52 lg:w-56" : "h-16"
-              }`}
-            >
-              <h6 className="text-primary">{title}</h6>
-              <div className="flex flex-col justify-start items-start w-full">
-                {children}
-              </div>
-            </div>
-          </div>
-          {isFreePromotion && (
-            <div className="w-full flex flex-row justify-center items-center pt-5">
-              <button className="w-56 h-9 flex justify-center items-center font-semibold rounded-full border-2 border-secondary2 hover:border-black hover:bg-black hover:text-white">
-                Upgrade Promotion
-              </button>
-            </div>
-          )}
-        </button>
+        )}
+      </div>
+      <div className="w-full flex flex-col justify-center items-center pt-4 pb-2 px-5">
+        <h6 className="w-full text-center text-primary font-bold mt-3">
+          {title}
+        </h6>
+        <p className="w-full text-center text-secondary1/50 text-medium">
+          by{" "}
+          <a
+            className="inline text-primary transition hover:text-black"
+            href="/profile"
+          >
+            You
+          </a>
+        </p>
+        <p className="w-3/4 text-center truncate mt-3">{description}</p>
+      </div>
+      <hr className="w-full mt-2 text-secondary3 px-5" />
+      {children}
+      {isFreePromotion && (
+        <div className="w-full flex flex-row justify-center items-center pt-5 px-5">
+          <button className="w-56 h-9 flex justify-center items-center font-semibold rounded-full border-2 border-secondary2 hover:bg-black hover:border-black hover:text-white">
+            Upgrade Promotion
+          </button>
+        </div>
       )}
-    </>
+    </button>
   );
 }
 
 Tile.Collection = function ({
   img,
+  logoImg,
   title,
   description,
   numNFTs,
   isFreePromotion,
-  display,
+  likes,
+  views,
 }) {
   return (
     <Tile
       img={img}
+      logoImg={logoImg}
       title={title}
       description={description}
       isFreePromotion={isFreePromotion}
-      display={display}
+      likes={likes}
+      views={views}
     >
-      <div className="w-full text-left mt-5 flex flex-row justify-start items-center gap-4">
-        <p className="tag">Contains: </p>
+      <div className="w-full text-center mt-5 flex flex-row justify-center items-center gap-4">
         <p className="caption">
-          {numNFTs} NFT{numNFTs > 1 && "s"}
+          {numNFTs} Item{numNFTs > 1 && "s"}
         </p>
       </div>
     </Tile>
@@ -102,45 +93,23 @@ Tile.Collection = function ({
 
 Tile.NFT = function ({
   img,
+  logoImg,
   title,
   description,
-  price,
-  royalty,
-  numUnlockables,
-  numUtilities,
   isFreePromotion,
-  display,
+  likes,
+  views,
 }) {
   return (
     <Tile
       img={img}
+      logoImg={logoImg}
       title={title}
       description={description}
       isFreePromotion={isFreePromotion}
-      display={display}
-      isLargeListItem={display === "list" ? true : false}
-    >
-      <div className="w-full text-left mt-5 flex flex-row justify-between items-center">
-        <p className="tag">Price: </p>
-        <p className="caption">{price} ETH</p>
-      </div>
-      <div className="w-full text-left mt-1 flex flex-row justify-between items-center">
-        <p className="tag">Royalty: </p>
-        <p className="caption">{royalty}%</p>
-      </div>
-      {display === "grid" && (
-        <>
-          <div className="w-full text-left mt-1 flex flex-row justify-between items-center">
-            <p className="tag">Unlockables: </p>
-            <p className="caption">{numUnlockables}</p>
-          </div>
-          <div className="w-full text-left mt-1 flex flex-row justify-between items-center">
-            <p className="tag">Utilities: </p>
-            <p className="caption">{numUtilities}</p>
-          </div>
-        </>
-      )}
-    </Tile>
+      likes={likes}
+      views={views}
+    ></Tile>
   );
 };
 

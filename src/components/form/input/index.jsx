@@ -7,6 +7,7 @@ import Select from "./Select";
 import Switch from "./Switch";
 import Text from "./Text";
 import TextArea from "./TextArea";
+import Socials from "./socials";
 
 function Input() {
   return <div>Input</div>;
@@ -19,5 +20,6 @@ Input.Select = Select;
 Input.Switch = Switch;
 Input.Text = Text;
 Input.TextArea = TextArea;
+Input.Socials = Socials;
 
 export default Input;

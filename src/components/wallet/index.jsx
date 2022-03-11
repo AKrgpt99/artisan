@@ -1,15 +1,13 @@
 import React from "react";
 
+import Layout from "../layout";
+
 function Wallet() {
   return (
-    <div className="w-full h-fit bg-secondary4">
-      <div className="w-full px-5 lg:pl-12 pt-36 pb-6 bg-white">
-        <h2>Wallet</h2>
-      </div>
-      <div className="w-full px-5 lg:pl-12 mt-8 flex flex-col justify-center items-start">
-        hello
-      </div>
-    </div>
+    <Layout.Page>
+      <Layout.Page.Header>Wallet</Layout.Page.Header>
+      <Layout.Page.Container>hello</Layout.Page.Container>
+    </Layout.Page>
   );
 }
 

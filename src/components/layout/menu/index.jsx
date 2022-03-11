@@ -1,51 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 
 import { ReactComponent as ChainsLogo } from "../../../assets/images/Artisan_Chains.svg";
-import { ReactComponent as AlarmIcon } from "../../../assets/images/alarm_icon.svg";
 import { ReactComponent as SearchIcon } from "../../../assets/images/search_icon.svg";
-import { ReactComponent as CloseIcon } from "../../../assets/images/close_icon.svg";
 
 import MenuItem from "./Item";
 import MenuItems from "./Items";
 
-function Menu({ show, children, onClick }) {
+import "./Menu.css";
+
+function Menu({ show, children, expanded }) {
   return (
     <>
       {/* Desktop */}
-      <div className="h-screen hidden lg:flex flex-col justify-start items-start fixed top-0 left-0 z-20 bg-white border-r-2 border-secondary3">
-        <Link
-          to="/"
-          className="h-12 flex flex-row justify-center items-center gap-4 mx-5 my-9"
+      <CSSTransition classNames="menu" in={expanded} timeout={250}>
+        <div
+          className={`h-screen hidden lg:flex flex-col justify-start items-start fixed top-0 left-0 z-20 bg-white border-r-2 border-secondary3 transition`}
         >
-          <ChainsLogo width="48px" />
-          <h2 className="font-bold text-primary">ARTISAN</h2>
-        </Link>
-        {children}
-      </div>
+          <Link
+            to="/"
+            className="h-12 flex flex-row justify-center items-center gap-4 mx-5 my-9"
+          >
+            <ChainsLogo width="48px" />
+            <CSSTransition
+              in={expanded}
+              classNames="logo"
+              timeout={150}
+              unmountOnExit
+            >
+              <h2 className="font-bold text-primary transition">ARTISAN</h2>
+            </CSSTransition>
+          </Link>
+          {children}
+        </div>
+      </CSSTransition>
       {/* End Desktop */}
       {/* Mobile */}
-      {show && (
-        <div className="h-screen w-full flex lg:hidden flex-col justify-start items-start fixed top-0 left-0 z-20 bg-white border-r-2 border-secondary3">
-          <div className="h-12 w-full flex flex-row justify-between items-center px-5 my-10">
-            <Link
-              to="/"
-              className="flex flex-row justify-center items-center gap-4"
-              onClick={onClick}
-            >
-              <ChainsLogo width="48px" />
-              <h2 className="font-bold text-primary">ARTISAN</h2>
-            </Link>
-            <div className="flex flex-row justify-center items-center gap-6">
-              <button>
-                <AlarmIcon />
-              </button>
-              <button onClick={onClick}>
-                <CloseIcon />
-              </button>
-            </div>
-          </div>
-          <div className="w-full px-4 flex flex-row justify-between items-center">
+      <CSSTransition
+        in={show}
+        classNames="mobile-menu"
+        timeout={250}
+        unmountOnExit
+      >
+        <div className="h-screen w-full flex lg:hidden flex-col justify-start items-start fixed top-0 left-0 z-20 bg-transparent pt-32">
+          <div className="w-full px-4 flex flex-row justify-between items-center pb-4 bg-white">
             <div className="relative flex items-center">
               <SearchIcon className="absolute left-4" />
               <input
@@ -58,7 +57,7 @@ function Menu({ show, children, onClick }) {
           </div>
           {children}
         </div>
-      )}
+      </CSSTransition>
       {/* End Mobile */}
     </>
   );
