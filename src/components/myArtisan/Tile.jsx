@@ -4,8 +4,8 @@ import HeartIcon from "../../assets/images/heart1.svg";
 import VisibleIcon from "../../assets/images/visible.svg";
 
 function Tile({
-  img,
-  logoImg,
+  imgSrc,
+  logoImgSrc,
   title,
   description,
   children,
@@ -25,9 +25,19 @@ function Tile({
           <p className="text-xs font-bold text-secondary1/50">{views}</p>
         </div>
       </div>
-      <div className="w-full h-fit flex justify-center items-center mt-5 px-5">
-        {img}
-        {logoImg}
+      <div className="w-full h-fit flex justify-center items-center">
+        {imgSrc && (
+          <img
+            src={imgSrc}
+            className="object-contain w-full h-52 lg:h-36 rounded-b-xl"
+          />
+        )}
+        {logoImgSrc && (
+          <img
+            src={logoImgSrc}
+            className="object-cover w-24 h-24 lg:w-16 lg:h-16 rounded-full absolute top-[11rem] lg:top-[9rem] z-20"
+          />
+        )}
         {isFreePromotion && (
           <div className="absolute top-16 left-0 w-32 h-7 flex justify-center items-center bg-secondary2">
             <p className="tag">Promoted Free</p>
@@ -63,22 +73,20 @@ function Tile({
 }
 
 Tile.Collection = function ({
-  img,
-  logoImg,
+  imgSrc,
+  logoImgSrc,
   title,
   description,
   numNFTs,
-  isFreePromotion,
   likes,
   views,
 }) {
   return (
     <Tile
-      img={img}
-      logoImg={logoImg}
+      imgSrc={imgSrc}
+      logoImgSrc={logoImgSrc}
       title={title}
       description={description}
-      isFreePromotion={isFreePromotion}
       likes={likes}
       views={views}
     >
@@ -92,8 +100,8 @@ Tile.Collection = function ({
 };
 
 Tile.NFT = function ({
-  img,
-  logoImg,
+  imgSrc,
+  logoImgSrc,
   title,
   description,
   isFreePromotion,
@@ -102,8 +110,8 @@ Tile.NFT = function ({
 }) {
   return (
     <Tile
-      img={img}
-      logoImg={logoImg}
+      imgSrc={imgSrc}
+      logoImgSrc={logoImgSrc}
       title={title}
       description={description}
       isFreePromotion={isFreePromotion}

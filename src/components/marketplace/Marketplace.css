@@ -1,0 +1,91 @@
+@keyframes growCarouselButton {
+  0% {
+    width: 0.625rem;
+  }
+
+  100% {
+    width: 1rem;
+  }
+}
+
+@keyframes shrinkCarouselButton {
+  0% {
+    width: 1rem;
+  }
+
+  100% {
+    width: 1rem;
+  }
+}
+
+@keyframes slideInCarouselPage {
+  0% {
+    left: 100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slideOutCarouselPage {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+.selected-carousel-button-enter {
+  width: 0.5rem;
+}
+
+.selected-carousel-button-enter-active {
+  animation: growCarouselButton 250ms ease-in-out;
+  animation-delay: 100ms;
+}
+
+.selected-carousel-button-enter-done {
+  width: 1rem;
+}
+
+.selected-carousel-button-exit {
+  width: 1rem;
+}
+
+.selected-carousel-button-exit-active {
+  animation: shrinkCarouselButton 250ms ease-in-out;
+  animation-delay: 100ms;
+}
+
+.selected-carousel-button-exit-done {
+  width: 0.5rem;
+}
+
+.selected-carousel-page-enter {
+  left: 100%;
+}
+
+.selected-carousel-page-enter-active {
+  animation: slideInCarouselPage 350ms ease-in-out;
+  animation-delay: 100ms;
+}
+
+.selected-carousel-page-enter-done {
+  left: 0;
+}
+
+.selected-carousel-page-exit {
+  left: 0;
+}
+
+.selected-carousel-page-exit-active {
+  animation: slideOutCarouselPage 350ms ease-in-out;
+  animation-delay: 100ms;
+}
+
+.selected-carousel-page-exit-done {
+  left: -100%;
+}

@@ -14,12 +14,7 @@ function MyArtisan() {
       <Layout.Page.Container>
         <Section>
           <Tile.NFT
-            img={
-              <img
-                src={NFT2}
-                className="object-cover w-full h-full rounded-xl"
-              />
-            }
+            imgSrc={NFT2}
             title="NFT Title"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -29,26 +24,16 @@ function MyArtisan() {
           />
         </Section>
         <Section title={`Collections (${1})`} className="mt-16">
-          {/* <Tile.Collection
-            logoImg={
-              <img
-                src={NFT1}
-                className="object-cover w-24 h-24 lg:w-16 lg:h-16 rounded-full absolute top-[11rem] lg:top-[9rem] z-20"
-              />
-            }
-            img={
-              <img
-                src={NFT2}
-                className="object-contain w-full h-52 lg:h-36 rounded-xl"
-              />
-            }
+          <Tile.Collection
+            logoImgSrc={NFT1}
+            imgSrc={NFT2}
             title="Collection Title"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua."
             numNFTs={1}
             likes={32}
             views={76}
-          /> */}
+          />
         </Section>
       </Layout.Page.Container>
     </Layout.Page>
