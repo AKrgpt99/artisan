@@ -35,7 +35,7 @@ function App() {
   });
 
   return (
-    <div className="p-0 lg:px-60">
+    <div className="p-0 lg:px-28 xl:px-60">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout routes={routes} />}>

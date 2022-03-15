@@ -24,6 +24,7 @@ type User
   createdCollections: [Collection] @hasMany
   likedCollections: [Collection]
     @manyToMany(relationName: "UserCollectionLikes")
+  externals: [String]
 }
 
 type Token

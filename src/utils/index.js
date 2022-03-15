@@ -3,6 +3,8 @@ export const CATEGORIES = [
   { value: "Collectibles" },
   { value: "Music" },
   { value: "Photography" },
+  { value: "Cinematography" },
+  { value: "Animation" },
   { value: "Sports" },
   { value: "Utility" },
   { value: "Trading Cards" },
@@ -10,7 +12,7 @@ export const CATEGORIES = [
 
 export function websiteIsValid(external) {
   return external.match(
-    /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+    /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
   );
 }
 

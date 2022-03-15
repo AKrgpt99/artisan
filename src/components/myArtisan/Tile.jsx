@@ -12,9 +12,10 @@ function Tile({
   isFreePromotion,
   views,
   likes,
+  nft,
 }) {
   return (
-    <button className="bg-white h-auto rounded-xl flex flex-col justify-start items-center pb-5 relative z-0 shadow-xl">
+    <button className="w-full bg-white h-auto rounded-xl flex flex-col justify-start items-center pb-5 relative z-0 shadow-xl">
       <div className="h-8 w-full bg-secondary1/[0.125] rounded-t-xl px-5 flex flex-row justify-end items-center gap-4">
         <div className="flex flex-row items-center gap-1">
           <img src={HeartIcon} alt="likes" className="w-5 h-5" />
@@ -29,13 +30,13 @@ function Tile({
         {imgSrc && (
           <img
             src={imgSrc}
-            className="object-contain w-full h-52 lg:h-36 rounded-b-xl"
+            className="object-cover w-full h-52 lg:h-36 rounded-b-xl"
           />
         )}
         {logoImgSrc && (
           <img
             src={logoImgSrc}
-            className="object-cover w-24 h-24 lg:w-16 lg:h-16 rounded-full absolute top-[11rem] lg:top-[9rem] z-20"
+            className="object-cover w-16 h-16 rounded-full absolute top-[13rem] lg:top-[9rem] z-20"
           />
         )}
         {isFreePromotion && (
@@ -44,7 +45,11 @@ function Tile({
           </div>
         )}
       </div>
-      <div className="w-full flex flex-col justify-center items-center pt-4 pb-2 px-5">
+      <div
+        className={`w-full flex flex-col justify-center items-center pt-${
+          nft ? "4" : "8"
+        } pb-2 px-5`}
+      >
         <h6 className="w-full text-center text-primary font-bold mt-3">
           {title}
         </h6>
@@ -117,6 +122,7 @@ Tile.NFT = function ({
       isFreePromotion={isFreePromotion}
       likes={likes}
       views={views}
+      nft
     ></Tile>
   );
 };
