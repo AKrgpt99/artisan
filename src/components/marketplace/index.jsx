@@ -20,11 +20,44 @@ function Marketplace() {
       <Layout.Page.Header>Marketplace</Layout.Page.Header>
       <Layout.Page.Container>
         <Carousel>
-          <div className="w-full h-full bg-red-900"></div>
-          <div className="w-full h-full bg-cyan-900"></div>
-          <div className="w-full h-full bg-blue-900"></div>
-          <div className="w-full h-full bg-green-900"></div>
-          <div className="w-full h-full bg-purple-900"></div>
+          <div className="w-full h-full bg-secondary3 p-5">
+            <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-5 p-5">
+              <div className="w-full h-full flex flex-col justify-center items-start gap-4 p-5">
+                <h1 className="font-bold text-secondary1">
+                  Find, collect, and sell unique NFTs
+                </h1>
+                <p>Canada's first loyalty platform and marketplace</p>
+                <div className="flex flex-row gap-4">
+                  <button className="font-semibold px-5 py-2 bg-primary border-2 border-primary text-white rounded-full transition hover:bg-secondary1 hover:border-secondary1">
+                    Discover
+                  </button>
+                  <button className="font-semibold px-5 py-2 border-2 border-primary text-primary rounded-full transition hover:text-secondary1 hover:border-secondary1">
+                    Create
+                  </button>
+                </div>
+              </div>
+              <div className="w-full h-full flex justify-center items-center p-5">
+                <button className="w-full h-full rounded-xl bg-secondary1/25 overflow-hidden relative flex flex-col justify-end items-center shadow-xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1491466424936-e304919aada7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80"
+                    className="w-full h-full object-cover absolute top-0 left-0 z-0"
+                    alt=""
+                  />
+                  <div className="w-full h-16 bg-secondary3 z-[1] flex flex-row justify-start items-center px-5">
+                    <div className="flex flex-col">
+                      <p className="font-semibold">Northern Lights</p>
+                      <a
+                        href="/"
+                        className="font-medium text-primary text-xs hover:underline text-left"
+                      >
+                        abhinav
+                      </a>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
         </Carousel>
         <div className="w-full flex flex-col h-fit gap-8 mt-16">
           <div className="w-full">
@@ -39,9 +72,22 @@ function Marketplace() {
                   key={i}
                   className="w-full h-96 bg-secondary3 rounded-xl shadow-xl relative overflow-hidden"
                 >
-                  <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/50 to-transparent"></div>
-                  <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full"></div>
-                  <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4">
+                  <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/75 to-transparent z-[1]"></div>
+                  <div className="w-full h-full absolute top-0 left-0 z-[0]">
+                    <img
+                      src={details.featureURI}
+                      alt="featured image"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full z-[2] overflow-hidden">
+                    <img
+                      src={details.logoURI}
+                      alt="logo image"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4 z-[2]">
                     <div className="w-full flex flex-col justify-center items-start text-white gap-2 text-left">
                       <h6>{details.name}</h6>
                       <p className="w-full h-fit caption font-bold text-ellipsis">
@@ -72,7 +118,13 @@ function Marketplace() {
                       {i + 1}
                     </div>
                     <div className="w-20 h-full flex justify-center items-center">
-                      <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
+                      <div className="w-12 h-12 bg-secondary1/25 rounded-full overflow-hidden">
+                        <img
+                          src={details.logoURI}
+                          alt="logo"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
                     <div className="flex flex-row justify-between items-center h-full w-fit py-3">
                       <div className="flex flex-col justify-center items-start">
@@ -182,10 +234,16 @@ function Marketplace() {
               return (
                 <button
                   key={i}
-                  className="w-full h-56 rounded-xl bg-secondary3 shadow-lg flex flex-col overflow-hidden"
+                  className="w-full h-56 rounded-xl bg-secondary3 shadow-lg flex flex-col justify-end overflow-hidden relative"
                 >
-                  <div className="h-40 w-full bg-secondary1/25"></div>
-                  <div className="w-full h-16 flex justify-center items-center">
+                  <div className="h-full w-full absolute top-0 left-0 bg-secondary1/25 z-[0]">
+                    <img
+                      src={data.categories[category.value].bgURI}
+                      alt="category"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-full h-16 bg-secondary3 flex justify-center items-center z-[1]">
                     <p className="font-semibold text-secondary1/50">
                       {category.value}
                     </p>
@@ -196,6 +254,7 @@ function Marketplace() {
           </div>
         </div>
       </Layout.Page.Container>
+      <Layout.Page.Footer />
     </Layout.Page>
   );
 }

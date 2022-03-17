@@ -73,9 +73,7 @@ function ListView({ children, fullWidth }) {
           return (
             <button
               key={i}
-              className={`w-full ${
-                !fullWidth && "md:w-1/2 2xl:w-1/3"
-              } h-[22rem] snap-start shrink-0 p-2`}
+              className={`w-full md:w-1/2 2xl:w-1/3 h-[22rem] snap-start shrink-0 p-2`}
             >
               {child}
             </button>
