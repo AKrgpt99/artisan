@@ -12,58 +12,7 @@ import { ReactComponent as InstagramLogo } from "../../assets/images/instagram-b
 import { ReactComponent as TwitterLogo } from "../../assets/images/twitter-brands.svg";
 import { ReactComponent as DiscordLogo } from "../../assets/images/discord-brands.svg";
 
-const data = {
-  topArtists: [
-    {
-      username: "JoyBoy",
-      profileURI: "https://im5.ezgif.com/tmp/ezgif-5-27fae1cd19.jpg",
-      bio: "I'm gonna be the King of the Pirates, if I've to die fighting for that, then I'd die!",
-      externals: [
-        "https://www.instagram.com/monkeydluffy",
-        "https://twitter.com/mdluffy_",
-        "https://onepiece.fandom.com/wiki/Monkey_D._Luffy",
-      ],
-      createdCollectionsLength: 50,
-      createdTokensLength: 500,
-    },
-    {
-      username: "BoaHancock",
-      profileURI: "https://im5.ezgif.com/tmp/ezgif-5-7f512b4d2c.jpg",
-      bio: "Kneel before me, or be turned to stone. Your choice.",
-      externals: [
-        "https://www.instagram.com/hancock.official",
-        "https://twitter.com/thelovelyboa",
-        "https://onepiece.fandom.com/wiki/Boa_Hancock",
-      ],
-      createdCollectionsLength: 50,
-      createdTokensLength: 500,
-    },
-    {
-      username: "Shanks",
-      profileURI: "https://im5.ezgif.com/tmp/ezgif-5-3f72fb406e.jpg",
-      bio: "By Experiencing Both, Victory And Defeat, Running Away And Shedding Tears, A Man Will Become A Man. It's Okay To Cry, But You Have To Move On.",
-      externals: [
-        "https://www.instagram.com/shanks.emperor",
-        "https://twitter.com/shanksredx",
-        "https://onepiece.fandom.com/wiki/Shanks",
-      ],
-      createdCollectionsLength: 50,
-      createdTokensLength: 500,
-    },
-    {
-      username: "BigMom",
-      profileURI: "https://im5.ezgif.com/tmp/ezgif-5-266c4928d4.jpg",
-      bio: "Mamma, mamma! I want some cake!",
-      externals: [
-        "https://www.instagram.com/bigmom.posting",
-        "https://twitter.com/BigMom_Linlin_",
-        "https://onepiece.fandom.com/wiki/Charlotte_Linlin",
-      ],
-      createdCollectionsLength: 50,
-      createdTokensLength: 500,
-    },
-  ],
-};
+import data from "./mock-data";
 
 function Marketplace() {
   return (
@@ -84,42 +33,25 @@ function Marketplace() {
             </h3>
           </div>
           <div className="w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button className="w-full h-96 bg-secondary3 rounded-xl shadow-xl relative overflow-hidden">
-              <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/50 to-transparent"></div>
-              <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full"></div>
-              <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4">
-                <div className="w-full flex flex-col justify-center items-start text-white gap-2 text-left">
-                  <h6>Collection Name</h6>
-                  <p className="w-full h-fit caption font-bold text-ellipsis">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                </div>
-              </div>
-            </button>
-            <button className="w-full h-96 bg-secondary3 rounded-xl shadow-xl relative overflow-hidden">
-              <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/50 to-transparent"></div>
-              <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full"></div>
-              <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4">
-                <div className="w-full flex flex-col justify-center items-start text-white gap-2 text-left">
-                  <h6>Collection Name</h6>
-                  <p className="w-full h-fit caption font-bold text-ellipsis">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                </div>
-              </div>
-            </button>
-            <button className="w-full h-96 bg-secondary3 rounded-xl shadow-xl relative overflow-hidden">
-              <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/50 to-transparent"></div>
-              <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full"></div>
-              <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4">
-                <div className="w-full flex flex-col justify-center items-start text-white gap-2 text-left">
-                  <h6>Collection Name</h6>
-                  <p className="w-full h-fit caption font-bold text-ellipsis">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                </div>
-              </div>
-            </button>
+            {data.featured.map(function (details, i) {
+              return (
+                <button
+                  key={i}
+                  className="w-full h-96 bg-secondary3 rounded-xl shadow-xl relative overflow-hidden"
+                >
+                  <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-secondary1/50 to-transparent"></div>
+                  <div className="w-12 h-12 bg-secondary1/50 absolute top-5 right-5 rounded-full"></div>
+                  <div className="w-full flex flex-row absolute bottom-0 left-0 p-5 gap-4">
+                    <div className="w-full flex flex-col justify-center items-start text-white gap-2 text-left">
+                      <h6>{details.name}</h6>
+                      <p className="w-full h-fit caption font-bold text-ellipsis">
+                        {details.description}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="w-full flex flex-col h-fit gap-8 mt-16">
@@ -128,187 +60,48 @@ function Marketplace() {
               Trending
             </h3>
           </div>
-          <div className="w-full h-fit grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
-            <div className="w-full h-fit flex flex-col">
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    1
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #1</h6>
-                      <p className="caption">By User1</p>
+          <div className="w-full h-fit grid grid-cols-1 lg:grid-cols-2 lg:gap-x-8">
+            {data.trending.map(function (details, i) {
+              return (
+                <button
+                  key={i}
+                  className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3"
+                >
+                  <div className="flex flex-row h-full text-left">
+                    <div className="h-full flex items-center font-bold pl-4 text-sm md:text-base">
+                      {i + 1}
+                    </div>
+                    <div className="w-20 h-full flex justify-center items-center">
+                      <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
+                    </div>
+                    <div className="flex flex-row justify-between items-center h-full w-fit py-3">
+                      <div className="flex flex-col justify-center items-start">
+                        <h6 className="text-sm md:text-base font-semibold">
+                          {details.name}
+                        </h6>
+                        <p className="caption">By {details.creator.username}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-green-600">(+86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    2
+                  <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
+                    <p className="text-xs text-secondary1/50">Floor Price</p>
+                    <p className="font-bold text-right text-sm md:text-base">
+                      <span
+                        className={
+                          details.pctPriceChange >= 0
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }
+                      >
+                        ({details.pctPriceChange >= 0 && "+"}
+                        {Number.parseInt(details.pctPriceChange * 100)}%)
+                      </span>{" "}
+                      {details.floorPrice} XTZ
+                    </p>
                   </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #2</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-green-600">(+86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    3
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #3</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-green-600">(+86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    4
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #4</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-red-600">(-88%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-            </div>
-            <div className="w-full h-fit flex flex-col">
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    5
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #5</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-red-600">(-66%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    6
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #6</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-green-600">(+86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    7
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #7</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-red-600">(-86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-              <button className="w-full h-20 flex flex-row justify-between transition hover:rounded-lg hover:bg-secondary3/75 border-b-2 border-secondary3">
-                <div className="flex flex-row h-full">
-                  <div className="h-full flex items-center font-bold pl-4">
-                    8
-                  </div>
-                  <div className="w-20 h-full flex justify-center items-center">
-                    <div className="w-12 h-12 bg-secondary1/25 rounded-full"></div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center h-full w-fit py-3">
-                    <div className="flex flex-col justify-center items-start">
-                      <h6>Collection #8</h6>
-                      <p className="caption">By User1</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center items-end h-full py-3 pr-4">
-                  <p className="text-xs text-secondary1/50">Floor Price</p>
-                  <p className="font-bold">
-                    <span className="text-green-600">(+86%)</span> 4 XTZ
-                  </p>
-                </div>
-              </button>
-            </div>
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="w-full flex flex-col h-fit gap-8 mt-16">

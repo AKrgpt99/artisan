@@ -81,4 +81,5 @@ type Collection
   explicit: Boolean
   views: Int
   likes: [User] @manyToMany(relationName: "UserCollectionLikes")
+  floorPrice: Float
 }

@@ -8,8 +8,8 @@ function Section({ title, children, className }) {
         className={`w-full flex flex-col justify-center items-start gap-8 ${className}`}
       >
         {title && (
-          <div className="flex flex-row justify-center items-center">
-            <h3 className="font-semibold text-xl">{title}</h3>
+          <div className="w-full">
+            <h3 className="font-bold text-left text-primary">{title}</h3>
           </div>
         )}
         <div className="w-full overflow-x-auto disable-scrollbar lg:w-fit p-1 h-14 lg:h-12 bg-secondary1/[0.125] rounded-full relative flex flex-row justify-between items-center gap-1">

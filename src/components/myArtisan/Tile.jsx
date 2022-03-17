@@ -46,8 +46,8 @@ function Tile({
         )}
       </div>
       <div
-        className={`w-full flex flex-col justify-center items-center pt-${
-          nft ? "4" : "8"
+        className={`w-full flex flex-col justify-center items-center ${
+          nft ? "pt-4" : "pt-8"
         } pb-2 px-5`}
       >
         <h6 className="w-full text-center text-primary font-bold mt-3">
@@ -94,6 +94,7 @@ Tile.Collection = function ({
       description={description}
       likes={likes}
       views={views}
+      nft={false}
     >
       <div className="w-full text-center mt-5 flex flex-row justify-center items-center gap-4">
         <p className="caption">
